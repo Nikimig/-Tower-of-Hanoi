@@ -1,0 +1,57 @@
+body{
+   background-color: white;
+}
+
+.hann-label{
+   background-color: #8b8b8b;
+   height: 750px;
+   width: 1500px;
+   left: 10%;
+   top: 91px;
+   position: relative;
+   border: 5px solid #383838 ;
+   display: flex;}
+
+.pole{
+   background-color: #585858;
+   height: 600px;
+   width: 20px;
+   border-radius: 50% 50% 0% 0%;
+   margin-left: 250px;
+   margin-top: 142px; }
+
+.pole-label{
+   width: 500px;
+   display:flex;
+   display:grid;
+   grid-template-columns: repeat(1, 500px) ;
+   grid-template-rows: repeat(2, 90px);
+   padding-bottom:50px;}
+
+.ring{
+   height: 70px;
+   margin-top: 670px;
+   border-radius: 10%;
+   margin-left: 40%;
+   z-index: 1;
+   }
+
+.ring:hover{
+      filter: brightness(150%);
+   }
+
+
+.red{
+   width: 96px;
+   background-color: #c40404;
+   margin-top: 508px;
+   margin-left: 210px ;
+
+}
+.orange{
+   width: 154px;
+   background-color: #ffa500;
+   margin-top: 490px;
+   margin-left: 183px ;
+}
+
