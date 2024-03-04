@@ -25,14 +25,14 @@ body{
    display:flex;
    display:grid;
    grid-template-columns: repeat(1, 500px) ;
-   grid-template-rows: repeat(2, 90px);
+   grid-template-rows: repeat(7, 70px);
    padding-bottom:50px;}
 
 .ring{
-   height: 70px;
-   margin-top: 670px;
+   height: 60px;
+   /*margin-top: 670px;
+   margin-left: 40%;*/
    border-radius: 10%;
-   margin-left: 40%;
    z-index: 1;
    }
 
@@ -41,7 +41,7 @@ body{
    }
 
 
-.red{
+/*.red{
    width: 96px;
    background-color: #c40404;
    margin-top: 508px;
@@ -53,5 +53,9 @@ body{
    background-color: #ffa500;
    margin-top: 490px;
    margin-left: 183px ;
+} */
+.sectors{
+   height: 60px;
+   padding-top: 100px;
 }
 
