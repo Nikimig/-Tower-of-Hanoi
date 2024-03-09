@@ -7,7 +7,7 @@ body{
    height: 750px;
    width: 1500px;
    left: 10%;
-   top: 91px;
+
    position: relative;
    border: 5px solid #383838 ;
    display: flex;}
@@ -69,4 +69,39 @@ body{
    grid-template-columns: repeat(1, 500px) ;
    grid-template-rows: repeat(7, 70px);
    height: 750px;
+}
+.button{
+   height: 70px;
+   width: 200px;
+   background-color: #585858;
+   border-radius: 10px;
+   text-align: center;
+   margin-left: 15%;
+   margin-top: 91px;
+   cursor: pointer;
+}
+.res{
+   padding-top: 8px;
+   font-size: 50px;
+   font-style: normal;
+   color: #ffffff;
+}
+.button:active{
+   filter: brightness(150%);
+}
+.lable_out{
+   height: 70px;
+   width: 70px;
+   background-color: #585858;
+   position: absolute;
+   text-align: center;
+   border-radius: 10px;
+   top: 91px;
+   margin-left: 10%;
+}
+.out{
+   font-size: 50px;
+   font-style: normal;
+   color: #ffffff;
+   padding-top: 8px;
 }

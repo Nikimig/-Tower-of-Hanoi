@@ -3,11 +3,14 @@ var divPole = '<div class="pole $number"></div>';
 var divSector = '<div id="s$number" class="sector $number"></div>';
 var divBigSektor = '<div id="sek $number" class="sectorsAdd $number"></div>'
 const color = ['red', 'orange', 'yellow', 'green','lightblue', 'blue', 'purple' ];
+var out = document.querySelector('.out');
+var steps = 0;
+out.textContent = steps;
 
 $(function (){
    console.log('hann');
    addPole();
-   addRingsAndSectors()
+   addRingsAndSectors();
    setDraggable();
    setDroppable();
 
@@ -15,25 +18,20 @@ $(function (){
 
 function addPole(){
    for (let i = 1; i < 4; ++i ){
-      document.getElementById('p'+ String(i)).innerHTML += divPole.replace('$number', i)
-      //document.getElementById('p2').innerHTML += divPole.replace('$number', '2')
-      //document.getElementById('p3').innerHTML += divPole.replace('$number', '3')
+      document.getElementById('p'+ String(i)).innerHTML += divPole.replace('$number', i);
 
       document.getElementById('p'+ String(i)).innerHTML += divBigSektor.replace('$number', i).replace('$number', i);
-      //document.getElementById('p2').innerHTML += '<div id="sek $number" class="sectorsAdd $number"></div>'.replace('$number', '2').replace('$number', '2');
-      //document.getElementById('p3').innerHTML += '<div id="sek $number" class="sectorsAdd $number"></div>'.replace('$number', '3').replace('$number', '3');
 }}
 
 function addRingsAndSectors() {
    for (let i = 0; i < 7; ++i ){
       //Добавляем секторы перемещения
-      document.getElementById('sek 1').innerHTML += divSector.replace('$number','1' + i).replace('$number','1' + i) 
-      document.getElementById('sek 2').innerHTML += divSector.replace('$number','2' + i).replace('$number','2' + i)
-      document.getElementById('sek 3').innerHTML += divSector.replace('$number','3' + i).replace('$number','3' + i)
+      document.getElementById('sek 1').innerHTML += divSector.replace('$number','1' + i).replace('$number','1' + i);
+      document.getElementById('sek 2').innerHTML += divSector.replace('$number','2' + i).replace('$number','2' + i);
+      document.getElementById('sek 3').innerHTML += divSector.replace('$number','3' + i).replace('$number','3' + i);
       
       //Добавляем кольца
       document.getElementById('s'+ '1' + i).innerHTML += divRing.replace('$color', color[i]).replace('$number', i );
-      //console.log(document.querySelector('.' + color[i]));
       
       //Описываем стили колец
       document.querySelector('.' + color[i]).style.setProperty('background-color',  color[i]);
@@ -59,7 +57,7 @@ function setDroppable() {
 
          for (let i = 6; i > -1; --i ){
             if (document.getElementById('s'+ toCoord + i).hasChildNodes()==false || document.querySelector('#' + ui.draggable.attr('id')).parentElement == document.getElementById('s'+ toCoord + i)) {
-               if ( i == 6 || Number(div.style.width.replace('px', '')) < Number(document.getElementById('s'+ String(toCoord) + (i+1)).childNodes[0].style.width.replace('px', ''))) {  //console.log(i)
+               if ( i == 6 || Number(div.style.width.replace('px', '')) < Number(document.getElementById('s'+ String(toCoord) + (i+1)).childNodes[0].style.width.replace('px', '')) && toCoord != frCoord) {  //console.log(i)
                   div.remove()
                   document.getElementById('s'+ toCoord + i).innerHTML += div.outerHTML
                   document.querySelector('#' + ui.draggable.attr('id')).style.setProperty('top', 0 + 'px');
@@ -73,11 +71,8 @@ function setDroppable() {
                      $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className).substring(5)).draggable({ containment: ".hann-label", scroll: false });
                      $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className.substring(5)).replace('ui-draggable ui-draggable-handle ui-draggable-dragging ui-draggable-disabled', '')).draggable("enable")
                   }
-
-                  if ( id_el < 6 && (document.getElementById('s'+ frCoord + (id_el + 1))).hasChildNodes()){
-                     $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className).substring(5)).draggable({ containment: ".hann-label", scroll: false });
-                     $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className.substring(5)).replace('ui-draggable ui-draggable-handle ui-draggable-dragging ui-draggable-disabled', '')).draggable("enable")}
-                  
+                  ++steps
+                  out.textContent = steps;
                   break}else{
                      div.style.setProperty('top', 0 + 'px');
                      div.style.setProperty('left', 0 + 'px');
@@ -88,3 +83,54 @@ function setDroppable() {
                div.style.setProperty('top', 0 + 'px');
                div.style.setProperty('left', 0 + 'px');
                $('.' + String(document.querySelector('#' + ui.draggable.attr('id')).className.substring(5)).replace('ui-draggable ui-draggable-handle ui-draggable-dragging', '')).draggable("enable")}}}})}
+
+var from = 1;
+var too = 2;
+var buf = 3;
+
+
+function auto(){
+   var jfrom = 0;
+   var jtoo = 0;
+   var jbuf = 0;
+   for (let i = 0; i < 7; ++i ){
+      if (document.getElementById('s'+ from + i).hasChildNodes() == false){++jfrom}
+      if (document.getElementById('s'+ too + i).hasChildNodes() == false){ ++jtoo}
+      if (document.getElementById('s'+ buf + i).hasChildNodes() == false){ ++jbuf}}
+   
+   console.log(jfrom); console.log(jtoo); console.log(jbuf);
+
+      var ring = String(document.getElementById('s'+ from + jfrom).childNodes[0].id);
+      document.getElementById('s'+ buf + (jbuf-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
+      document.getElementById(ring).remove();
+      ++jfrom;
+      --jbuf;
+
+      var ring = String(document.getElementById('s'+ from + jfrom).childNodes[0].id);
+      document.getElementById('s'+ too + (jtoo-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
+      document.getElementById(ring).remove();
+      ++jfrom;
+      --jtoo;
+
+      var ring = String(document.getElementById('s'+ buf + jbuf).childNodes[0].id);
+      document.querySelector('#'+'s'+ too + (jtoo-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
+      console.log('s'+ too + (jtoo-1))
+      document.getElementById(ring).remove();
+      ++jbuf;
+      --jtoo;
+
+         //console.log(String(document.getElementById('s10').childNodes[0].id))};
+      //if (document.getElementById('s'+ bush + j-i).hasChildNodes()){}
+      
+      //document.getElementById('s'+ bush + (j-i)).innerHTML += document.querySelector('#'+'r' + i).outerHTML
+      //document.getElementById('r' + i).remove()
+      //document.getElementById('s'+ too + (j-i)).innerHTML += document.querySelector('#'+'r' + i).outerHTML
+      //document.getElementById('r' + i).remove()
+
+      //console.log(12)
+}
+
+
+
+
+document.querySelector('.button').onclick = auto;
