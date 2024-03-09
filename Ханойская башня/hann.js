@@ -12,16 +12,13 @@ $(function (){
    addPole();
    addRingsAndSectors();
    setDraggable();
-   setDroppable();
-
-});
+   setDroppable();});
 
 function addPole(){
    for (let i = 1; i < 4; ++i ){
       document.getElementById('p'+ String(i)).innerHTML += divPole.replace('$number', i);
 
-      document.getElementById('p'+ String(i)).innerHTML += divBigSektor.replace('$number', i).replace('$number', i);
-}}
+      document.getElementById('p'+ String(i)).innerHTML += divBigSektor.replace('$number', i).replace('$number', i);}}
 
 function addRingsAndSectors() {
    for (let i = 0; i < 7; ++i ){
@@ -35,13 +32,10 @@ function addRingsAndSectors() {
       
       //Описываем стили колец
       document.querySelector('.' + color[i]).style.setProperty('background-color',  color[i]);
-      document.querySelector('.' + color[i]).style.setProperty('width', 98 + (58 * i) + 'px');
-
-}}
+      document.querySelector('.' + color[i]).style.setProperty('width', 98 + (58 * i) + 'px');}}
 
 function setDraggable() {
-   $('.red ').draggable({ containment: ".hann-label", scroll: false });
-   }
+   $('.red ').draggable({ containment: ".hann-label", scroll: false });}
 
 function setDroppable() {
    $('.sectorsAdd').droppable({
@@ -69,10 +63,11 @@ function setDroppable() {
 
                   if ( id_el < 6 && (document.getElementById('s'+ frCoord + (id_el + 1))).hasChildNodes()){
                      $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className).substring(5)).draggable({ containment: ".hann-label", scroll: false });
-                     $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className.substring(5)).replace('ui-draggable ui-draggable-handle ui-draggable-dragging ui-draggable-disabled', '')).draggable("enable")
-                  }
+                     $('.' + String(document.getElementById('s'+ frCoord + (id_el + 1)).childNodes[0].className.substring(5)).replace('ui-draggable ui-draggable-handle ui-draggable-dragging ui-draggable-disabled', '')).draggable("enable")}
+
                   ++steps
                   out.textContent = steps;
+
                   break}else{
                      div.style.setProperty('top', 0 + 'px');
                      div.style.setProperty('left', 0 + 'px');
@@ -84,53 +79,62 @@ function setDroppable() {
                div.style.setProperty('left', 0 + 'px');
                $('.' + String(document.querySelector('#' + ui.draggable.attr('id')).className.substring(5)).replace('ui-draggable ui-draggable-handle ui-draggable-dragging', '')).draggable("enable")}}}})}
 
-var from = 1;
-var too = 2;
-var buf = 3;
 
+
+function clearaAll(){
+   for (let i = 0; i < 7; ++i ){
+      document.querySelector('.'+'ring').remove();}
+
+   for (let i = 0; i < 7; ++i ){
+      
+      document.getElementById('s'+ '1' + i).innerHTML += divRing.replace('$color', color[i]).replace('$number', i );
+      document.querySelector('.' + color[i]).style.setProperty('background-color',  color[i]);
+      document.querySelector('.' + color[i]).style.setProperty('width', 98 + (58 * i) + 'px');}
+
+   $('.red ').draggable({ containment: ".hann-label", scroll: false });
+
+   steps = 0;
+   out.textContent = steps;}
 
 function auto(){
+   var from = 1;
+   var too = 2;
+   var buf = 3;
    var jfrom = 0;
    var jtoo = 0;
    var jbuf = 0;
-   for (let i = 0; i < 7; ++i ){
-      if (document.getElementById('s'+ from + i).hasChildNodes() == false){++jfrom}
-      if (document.getElementById('s'+ too + i).hasChildNodes() == false){ ++jtoo}
-      if (document.getElementById('s'+ buf + i).hasChildNodes() == false){ ++jbuf}}
-   
-   console.log(jfrom); console.log(jtoo); console.log(jbuf);
+   clearaAll();
+   $('.red').draggable('destroy')
 
-      var ring = String(document.getElementById('s'+ from + jfrom).childNodes[0].id);
-      document.getElementById('s'+ buf + (jbuf-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
-      document.getElementById(ring).remove();
-      ++jfrom;
-      --jbuf;
+      function hanoi(n, from, too, buf) {
+         if (n === 1) {
+            for (let i = 0; i < 7; ++i ){
+            if (document.getElementById('s'+ from + i).hasChildNodes() == false){++jfrom};
+            if (document.getElementById('s'+ too + i).hasChildNodes() == false){ ++jtoo};
+            if (document.getElementById('s'+ buf + i).hasChildNodes() == false){ ++jbuf};}
+            var ring = String(document.getElementById('s'+ from + jfrom).childNodes[0].id);
+         document.getElementById('s'+ too + (jtoo-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
+         document.getElementById('s'+ from + jfrom).childNodes[0].remove();
+         console.log('Премещаем диск: ' + String(document.getElementById(ring).className.substring(5)) + ' c' + ' стержня ' + from + ' на' + ' стержень ' + too );
+         jfrom = 0;  jtoo = 0;   jbuf = 0;
+            return;}
+         
+         hanoi(n - 1, from, buf, too);
+         for (let i = 0; i < 7; ++i ){
+            if (document.getElementById('s'+ from + i).hasChildNodes() == false){++jfrom}
+            if (document.getElementById('s'+ too + i).hasChildNodes() == false){ ++jtoo}
+            if (document.getElementById('s'+ buf + i).hasChildNodes() == false){ ++jbuf}}
+         var ring = String(document.getElementById('s'+ from + jfrom).childNodes[0].id);
+         document.getElementById('s'+ too + (jtoo-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
+         document.getElementById('s'+ from + jfrom).childNodes[0].remove();
+         console.log('Премещаем диск: ' + String(document.getElementById(ring).className.substring(5)) + ' c' + ' стержня ' + from + ' на' + ' стержень ' + too );
+         jfrom = 0;  jtoo = 0;   jbuf = 0;
+         hanoi(n - 1, buf, too, from);}
 
-      var ring = String(document.getElementById('s'+ from + jfrom).childNodes[0].id);
-      document.getElementById('s'+ too + (jtoo-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
-      document.getElementById(ring).remove();
-      ++jfrom;
-      --jtoo;
+   hanoi(7, from, too, buf);
 
-      var ring = String(document.getElementById('s'+ buf + jbuf).childNodes[0].id);
-      document.querySelector('#'+'s'+ too + (jtoo-1)).innerHTML += document.querySelector('#'+ ring).outerHTML;
-      console.log('s'+ too + (jtoo-1))
-      document.getElementById(ring).remove();
-      ++jbuf;
-      --jtoo;
-
-         //console.log(String(document.getElementById('s10').childNodes[0].id))};
-      //if (document.getElementById('s'+ bush + j-i).hasChildNodes()){}
-      
-      //document.getElementById('s'+ bush + (j-i)).innerHTML += document.querySelector('#'+'r' + i).outerHTML
-      //document.getElementById('r' + i).remove()
-      //document.getElementById('s'+ too + (j-i)).innerHTML += document.querySelector('#'+'r' + i).outerHTML
-      //document.getElementById('r' + i).remove()
-
-      //console.log(12)
-}
-
-
-
+   $('.red ').draggable({ containment: ".hann-label", scroll: false });}
 
 document.querySelector('.button').onclick = auto;
+
+document.querySelector('.clear_all').onclick = clearaAll;

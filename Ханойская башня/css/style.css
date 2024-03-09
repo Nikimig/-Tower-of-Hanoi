@@ -6,7 +6,7 @@ body{
    background-color: #8b8b8b;
    height: 750px;
    width: 1500px;
-   left: 10%;
+   left: 250px;
 
    position: relative;
    border: 5px solid #383838 ;
@@ -58,7 +58,6 @@ body{
 } */
 .sector{
    height: 60px;
-
    vertical-align: middle;
    position: relative;
 }
@@ -76,7 +75,7 @@ body{
    background-color: #585858;
    border-radius: 10px;
    text-align: center;
-   margin-left: 15%;
+   margin-left: 380px;
    margin-top: 91px;
    cursor: pointer;
 }
@@ -97,11 +96,32 @@ body{
    text-align: center;
    border-radius: 10px;
    top: 91px;
-   margin-left: 10%;
+   margin-left: 250px;
 }
 .out{
    font-size: 50px;
    font-style: normal;
    color: #ffffff;
    padding-top: 8px;
+}
+.clear_all{
+   height: 70px;
+   width: 220px;
+   background-color: #585858;
+   border-radius: 10px;
+   text-align: center;
+   margin-left: 630px;
+   top: 91px;
+   cursor: pointer;
+   position: absolute;
+}
+.clear{
+   padding-top: 8px;
+   font-size: 50px;
+   font-style: normal;
+   color: #ffffff;
+}
+
+.clear_all:active{
+   filter: brightness(150%);
 }
